@@ -8,11 +8,22 @@
   <body >
     <div style="text-align: center">
         <h1>Hello <%= locals.user ? user.username + '!' : ' guest!' %></h1>
+        <%if(locals.user){%>
+            <%if(!user.memberStatus){%>
+              <p><a style="color:white" href="/become-member">Become a member</a>  to see post authors!</p>
+            <%}%>
+        <%}%>
         <p>You have visited this page: <%= viewCount%> times</p>
         <% for(post of messages){%>
             <div class="message">
               <p><%= post.message%></p>
-              <p>Author: <%= locals.user ? post.author : 'hidden'%></p>
+              <p>Author: 
+                <% if(locals.user){%>
+                  <%= user.memberStatus ? post.author : 'hidden'%>
+                <%} else {%>
+                  hidden
+                <%}%>
+              </p>
             </div>
         <%}%>
     </div>

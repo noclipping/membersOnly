@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%-include('./partials/header')%>
+    <%-include('./partials/navbar', {...(locals.user && {user:user})})%>
+  </head>
+  <body>
+    <h1>Enter passcode to gain access!</h1>
+    <form action="" method="POST">
+      <label for="passcode">Passcode</label>
+      <input name="passcode" placeholder="passcode" id="passcode" type="text" />
+      <button>Submit</button>
+    </form>
+  </body>
+</html>

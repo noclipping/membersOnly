@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const User = require('../models/user')
+const bcrypt = require('bcryptjs')
 // const mongoose = require("mongoose");
 // const Schema = mongoose.Schema;
 const passport = require('passport')
@@ -34,15 +35,20 @@ router.get('/create', function (req, res, next) {
     res.render('user_create', { title: 'Create User' })
 })
 router.post('/create', (req, res, next) => {
-    const user = new User({
-        username: req.body.username,
-        password: req.body.password,
-        memberStatus: false,
-    }).save((err) => {
+    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
         if (err) {
-            return next(err)
+            next(err)
         }
-        res.redirect('/')
+        const user = new User({
+            username: req.body.username,
+            password: hashedPassword,
+            memberStatus: false,
+        }).save((err) => {
+            if (err) {
+                return next(err)
+            }
+            res.redirect('/')
+        })
     })
 })
 

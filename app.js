@@ -16,6 +16,7 @@ var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 const postsRouter = require('./routes/posts')
 const User = require('./models/user')
+const bcrypt = require('bcryptjs')
 // mongoDB
 const mongoDB = process.env.MONGO_DB
 mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
@@ -48,10 +49,15 @@ passport.use(
             if (!user) {
                 return done(null, false, { message: 'Incorrect username' })
             }
-            if (user.password !== password) {
-                return done(null, false, { message: 'Incorrect password' })
-            }
-            return done(null, user)
+            bcrypt.compare(password, user.password, (err, res) => {
+                if (res) {
+                    // passwords match! log user in
+                    return done(null, user)
+                } else {
+                    // passwords do not match!
+                    return done(null, false, { message: 'Incorrect password' })
+                }
+            })
         })
     })
 )
