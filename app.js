@@ -14,7 +14,7 @@ const ms = require('milliseconds')
 // routes
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
-
+const User = require('./models/user')
 // mongoDB
 const mongoDB = process.env.MONGO_DB
 mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
