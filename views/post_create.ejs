@@ -5,11 +5,17 @@
     <%-include('./partials/navbar', {...(locals.user && {user:user})})%>
   </head>
   <body>
-    <h1>Create Post</h1>
-    <form action="" method="POST">
-      <label for="message">Message</label>
-      <input name="message" placeholder="message" id="message" type="text" />
-      <button>Post</button>
-    </form>
+    <div style='text-align: center;'>
+        <h1>Create Post</h1>
+        <form action="" method="POST">
+            <label for="message">Message</label>
+            <br>
+            <br>
+            <textarea name="message" rows="4" cols="50" placeholder="message" id="message" type="text"></textarea>
+            <br>
+            <br>
+            <button>Post</button>
+        </form>
+    </div>
   </body>
 </html>
