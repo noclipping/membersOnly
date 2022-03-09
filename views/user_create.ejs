@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <%-include('./partials/header')%>
-    <%-include('./partials/navbar', {user:user})%>
+    <%-include('./partials/navbar', {...(locals.user && {user:user})})%>
   </head>
   <body>
     <h1>Sign Up</h1>

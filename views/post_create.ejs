@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%-include('./partials/header')%>
+    <%-include('./partials/navbar', {...(locals.user && {user:user})})%>
+  </head>
+  <body>
+    <h1>Create Post</h1>
+    <form action="" method="POST">
+      <label for="message">Message</label>
+      <input name="message" placeholder="message" id="message" type="text" />
+      <button>Post</button>
+    </form>
+  </body>
+</html>

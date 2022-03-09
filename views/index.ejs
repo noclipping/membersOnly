@@ -2,10 +2,30 @@
 <html>
   <head>
     <%-include('./partials/header')%>
-    <%-include('./partials/navbar', {user:user})%>
+    <%-include('./partials/navbar', {...(locals.user && {user:user})})%>
   </head>
-  <body>
-    <h1>Hello <%= locals.user ? user.username + '!' : ' guest!' %></h1>
-    <p>Viewcount: <%= viewCount%></p>
+
+  <body >
+    <div style="text-align: center">
+        <h1>Hello <%= locals.user ? user.username + '!' : ' guest!' %></h1>
+        <p>You have visited this page: <%= viewCount%> times</p>
+        <% for(post of messages){%>
+            <div class="message">
+              <p><%= post.message%></p>
+              <p>Author: <%= locals.user ? post.author : 'hidden'%></p>
+            </div>
+        <%}%>
+    </div>
   </body>
 </html>
+<style>
+  .message{
+    background: rgba(12, 12, 12, 0.945); 
+    padding: 20px; 
+    border: solid 1px rgba(255, 255, 255, 0.685);
+    border-radius: 10px;
+    width: 80%; 
+    margin: 20px auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  }
+</style>

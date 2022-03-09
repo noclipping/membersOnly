@@ -1,18 +1,30 @@
 <div class="navbar">
     <div>
-     <a href="/">Home</a>
+     <a href="/">MembersOnly</a>
     </div>
     <div>
+        <%if(!locals.user){%>
         <a href="/users/login">Login</a>
+        <%}%>
     </div>
     <div>
+        <%if(!locals.user){%>
         <a href="/users/create">Signup</a>
+        <%}%>
+    </div>
+    <div>
+        <%if(locals.user){%>
+        <a href="/post/create">Create Post</a>
+        <%}%>
     </div>
     <div id="dropdown" >
         <%= locals.user ? user.username : 'guest' %>
-       <div id="dropdown-content" class="dropdown-content">
-           <a>Signout</a>
-       </div>
+        
+        <%if(locals.user){%>
+            <div id="dropdown-content" class="dropdown-content">
+                <a href="/log-out">Logout</a>
+            </div>
+       <%}%>
     </div>
   </div>
   
@@ -24,8 +36,9 @@
       }
     .navbar{
     display: grid;
-    grid-template-columns: 6fr 1fr 1fr 1fr;
-    background: black;
+    grid-template-columns: 6fr 1fr 1fr 1fr 1fr;
+    grid-gap: 15px;
+    background: rgba(0, 0, 0, 0.685);
     color: white;
     padding: 20px 5px;
     }

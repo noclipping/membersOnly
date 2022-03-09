@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+const Post = require('../models/post')
 const passport = require('passport')
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -10,7 +11,17 @@ router.get('/', function (req, res, next) {
     } else {
         req.session.viewCount = 1
     }
-    res.render('index', { user: req.user, viewCount: req.session.viewCount })
+    Post.find({}, (err, results) => {
+        console.log(results)
+        res.render('index', {
+            user: req.user,
+            viewCount: req.session.viewCount,
+            messages: results,
+        })
+    })
 })
-
+router.get('/log-out', (req, res) => {
+    req.logout()
+    res.redirect('/')
+})
 module.exports = router

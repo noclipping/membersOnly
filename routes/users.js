@@ -18,19 +18,17 @@ router.get('/login', function (req, res, next) {
 router.post(
     '/login',
     (req, res, next) => {
-        console.log('yo, mr white!')
         next()
     },
     passport.authenticate('local', {
         successRedirect: '/',
-        failureRedirect: '/',
+        failureRedirect: './login',
     })
 )
 
 // CREATE USER
 router.get('/create', function (req, res, next) {
     if (req.user) {
-        console.log('yop')
         res.redirect('/')
     }
     res.render('user_create', { title: 'Create User' })
