@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%-include('./partials/header')%>
+    <%-include('./partials/navbar', {...(locals.user && {user:user})})%>
+  </head>
+  <body>
+    <div style="text-align:center">
+        <h1>REMOVE MEMBERSHIP</h1>
+        <form action="" method="POST">
+            <p>Are you sure you want to remove your membership?</p>
+            <button>YES</button>
+        </form>
+    </div>
+  </body>
+</html>

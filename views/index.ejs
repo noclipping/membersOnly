@@ -11,6 +11,8 @@
         <%if(locals.user){%>
             <%if(!user.memberStatus){%>
               <p><a style="color:white" href="/become-member">Become a member</a>  to see post authors!</p>
+            <%} else {%>
+              <p><a href="/remove-member">Remove</a> your membership status here.</p>
             <%}%>
         <%}%>
         <p>You have visited this page: <%= viewCount%> times</p>

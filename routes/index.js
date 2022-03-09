@@ -49,4 +49,19 @@ router.post('/become-member', (req, res, next) => {
         res.redirect('/')
     }
 })
+router.get('/remove-member', (req, res) => {
+    res.render('remove_member', { user: req.user })
+})
+router.post('/remove-member', (req, res, next) => {
+    User.updateOne(
+        { id: req.user._id },
+        { memberStatus: false },
+        (err, result) => {
+            if (err) {
+            }
+            res.redirect('/')
+            next()
+        }
+    )
+})
 module.exports = router
