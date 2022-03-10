@@ -13,7 +13,6 @@ router.get('/', function (req, res, next) {
         req.session.viewCount = 1
     }
     Post.find({}, (err, results) => {
-        console.log(results)
         res.render('index', {
             user: req.user,
             viewCount: req.session.viewCount,
@@ -32,17 +31,17 @@ router.get('/become-member', (req, res) => {
 router.post('/become-member', (req, res, next) => {
     console.log('phase 1')
     if (req.body.passcode == 'secret') {
+        console.log('phase 2.0')
         User.updateOne(
-            { id: req.user._id },
+            { _id: req.user._id },
             { memberStatus: true },
             (err, result) => {
                 if (err) {
-                    console.log('phase 2')
+                    console.log('phase 2.2')
                 }
                 console.log('phase 3')
                 console.log('RESULT:', result)
                 res.redirect('/')
-                next()
             }
         )
     } else {
@@ -54,13 +53,12 @@ router.get('/remove-member', (req, res) => {
 })
 router.post('/remove-member', (req, res, next) => {
     User.updateOne(
-        { id: req.user._id },
+        { _id: req.user._id },
         { memberStatus: false },
         (err, result) => {
             if (err) {
             }
             res.redirect('/')
-            next()
         }
     )
 })
